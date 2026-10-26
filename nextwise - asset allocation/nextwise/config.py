@@ -31,7 +31,6 @@ PORTFOLIO = [
     {'name': 'L&G Battery Value-Chain UCITS ETF', 'symbol': 'BATT', 'ticker': 'BATT.L', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Batteries', 'asset_class': 'battery_equity'},
     {'name': 'Legrand', 'symbol': 'LR', 'ticker': 'LR.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
     {'name': 'Leonardo', 'symbol': 'LDO', 'ticker': 'LDO.MI', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
-    {'name': 'Leverage Shares 3x Apple ETP', 'symbol': '3AAP', 'ticker': '3AAP.MI', 'action': 'Alléger', 'confidence': 0.6, 'cluster': 'Technologie à levier', 'asset_class': 'leveraged_equity'},
     {'name': 'iShares MSCI World Health Care Sector Advanced UCITS ETF USD Acc', 'symbol': 'WHCA', 'ticker': 'WHCA.L', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Santé', 'asset_class': 'healthcare_equity'},
     {'name': 'Nexans', 'symbol': 'NEX', 'ticker': 'NEX.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Électrification', 'asset_class': 'electrification'},
     {'name': 'Prysmian', 'symbol': 'PRY', 'ticker': 'PRY.MI', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},

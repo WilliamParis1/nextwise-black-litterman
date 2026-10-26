@@ -150,7 +150,6 @@ st.markdown("""
 """)
 
 st.caption("Convictions initiales qualitatives : la confiance mesure la force d’une vue Black-Litterman, pas une probabilité de gain. Les valorisations récentes ne sont pas prises en compte.")
-st.warning("3AAP est un produit Apple à levier quotidien 3x : il n’est pas équivalent à une action Apple détenue à long terme. Les contraintes du modèle ne certifient pas l’éligibilité réglementaire de ce produit.")
 
 # ═════════════════════════════════════════════════════════════════════════════
 # DATA LOADING & MODEL EXECUTION

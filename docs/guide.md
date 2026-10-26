@@ -103,7 +103,7 @@ Tous les paramètres sont modifiables en temps réel dans la sidebar:
 
 ## Portefeuille actuel
 
-Voir le [portefeuille et les convictions initiales](portfolio.md) pour les 23 actifs demandés, les tickers proposés et les motifs. Chaque ligne possède une `confidence` individuelle, prioritaire sur le barème par action ; ce paramètre n’est pas une probabilité de gain.
+Voir le [portefeuille et les convictions initiales](portfolio.md) pour les 22 actifs demandés, les tickers proposés et les motifs. Chaque ligne possède une `confidence` individuelle, prioritaire sur le barème par action ; ce paramètre n’est pas une probabilité de gain.
 
 ## 🔧 Personnalisation du Portefeuille
 

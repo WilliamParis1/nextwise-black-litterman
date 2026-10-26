@@ -38,7 +38,7 @@ python -m streamlit run app.py
 
 ## Documentation
 
-- [Portefeuille et convictions](docs/portfolio.md) : les 23 actifs, correspondances Yahoo et validation en direct et hypothèses de confiance.
+- [Portefeuille et convictions](docs/portfolio.md) : les 22 actifs, correspondances Yahoo et validation en direct et hypothèses de confiance.
 
 - [Guide utilisateur](docs/guide.md) : pipeline, onglets du dashboard, paramètres, convictions et personnalisation du portefeuille.
 - [Code de l’application](nextwise%20-%20asset%20allocation/nextwise/) : dashboard, modèles, collecte des données et backtest.

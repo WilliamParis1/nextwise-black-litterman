@@ -1,10 +1,10 @@
 # Portefeuille et convictions initiales
 
-Les 23 lignes demandées remplacent entièrement le portefeuille initial. `symbol` conserve le code fourni ; `ticker` est la correspondance Yahoo proposée avec place de cotation. Les 23 tickers ont fourni des cours en direct le 26 octobre 2026. Les codes courts peuvent désigner des cotations ou classes différentes ; vérifier les ISIN avec le relevé du courtier pour confirmer les parts détenues. FOHW.PA est identifié par Yahoo comme Franklin Future of Health and Wellness UCITS ETF.
+Les 22 lignes du portefeuille remplacent entièrement le portefeuille initial. `symbol` conserve le code fourni ; `ticker` est la correspondance Yahoo proposée avec place de cotation. Les 22 tickers ont fourni des cours en direct le 26 octobre 2026. Les codes courts peuvent désigner des cotations ou classes différentes ; vérifier les ISIN avec le relevé du courtier pour confirmer les parts détenues. FOHW.PA est identifié par Yahoo comme Franklin Future of Health and Wellness UCITS ETF.
 
 ## Méthode de conviction
 
-Les vues sont des hypothèses qualitatives de départ, sans analyse des cours actuels, des dernières publications ou des multiples de valorisation. Une exposition structurelle à l’électrification ou une diversification sectorielle défensive reçoit un léger biais positif ; les thèmes cycliques, concentrés ou à levier reçoivent un biais prudent. Aucun actif ne reçoit de conviction forte par défaut.
+Les vues sont des hypothèses qualitatives de départ, sans analyse des cours actuels, des dernières publications ou des multiples de valorisation. Une exposition structurelle à l’électrification ou une diversification sectorielle défensive reçoit un léger biais positif ; les thèmes cycliques ou concentrés reçoivent un biais prudent. Aucun actif ne reçoit de conviction forte par défaut.
 
 `confidence` est la force de la vue Black-Litterman (0 à 1), **pas la probabilité de gain**, ni un score de qualité des données. Une confiance de 0,60 sur « Alléger » renforce une vue négative. « Maintien » est neutre et ne crée pas de vue, quelle que soit sa confiance renseignée. Les valeurs par actif priment sur `CONVICTION_CONFIDENCE` ; les anciens paramètres par action restent le repli pour les entrées sans `confidence`.
 
@@ -27,7 +27,6 @@ Les excès de rendement annuels restent ceux du modèle : Renforcer +3 %, Attent
 | L&G Battery Value-Chain UCITS ETF | BATT | `BATT.L` | Attente | 30% | Thématique cyclique, concurrence et sensibilité aux matières premières. |
 | Legrand | LR | `LR.PA` | Renforcer | 55% | Exposition structurelle aux infrastructures électriques ; cycle du bâtiment. |
 | Leonardo | LDO | `LDO.MI` | Renforcer | 50% | Exposition défense diversifiée ; risques de programmes et de contrats. |
-| Leverage Shares 3x Apple ETP | 3AAP | `3AAP.MI` | Alléger | 60% | Levier quotidien 3x, dépendance au chemin et concentration sur Apple. |
 | iShares MSCI World Health Care Sector Advanced UCITS ETF USD Acc | WHCA | `WHCA.L` | Renforcer | 50% | Diversification sectorielle défensive ; risques réglementaires et de change. |
 | Nexans | NEX | `NEX.PA` | Renforcer | 50% | Demande des réseaux électriques, avec risques de projets et d’exécution. |
 | Prysmian | PRY | `PRY.MI` | Renforcer | 55% | Exposition aux câbles et réseaux ; dépendance aux investissements. |
@@ -41,16 +40,15 @@ Les excès de rendement annuels restent ceux du modèle : Renforcer +3 %, Attent
 ## Données et limites
 
 - Aucun ancien actif ou fonds de remplacement n’est conservé. Une donnée manquante ne doit pas être remplacée par une exposition différente.
-- Les places sont qualifiées pour Yahoo. WHCA.L fournit un historique plus long que WHCA.AS ; 3AAP.MI fournit un historique exploitable contrairement à 3AAP.L. Il s’agit de cotations alternatives identifiées sous le même nom de fonds ou produit, pas de fonds de remplacement. Vérifier les ISIN du relevé avant de traiter ces données comme les parts effectivement détenues.
+- Les places sont qualifiées pour Yahoo. WHCA.L fournit un historique plus long que WHCA.AS. Il s’agit de cotations alternatives identifiées sous le même nom de fonds ou produit, pas de fonds de remplacement. Vérifier les ISIN du relevé avant de traiter ces données comme les parts effectivement détenues.
 - Le portefeuille reste majoritairement actions, avec recoupements sectoriels. Les plafonds de cluster s’appliquent aux groupes définis dans `config.py` ; ils ne suppriment pas toutes les corrélations entre groupes.
 - Les cotations peuvent être en EUR, GBP ou USD : le backtest existant utilise les rendements locaux sans conversion commune de devise.
-- 3AAP est un ETP à levier quotidien, avec dépendance au chemin, frais et risques d’émetteur. Le backtest de ses cours ne simule pas les exigences réglementaires ni une exposition notionnelle UCITS.
 - Les poids ajustés à partir de tout l’historique sont ensuite backtestés sur ce même historique : la comparaison est rétrospective, pas un test hors échantillon.
 
 Pour ajuster une vue, modifier `action` et `confidence` dans `config.py`. Les motifs sont documentés ici pour permettre une révision explicite.
 
 ## Validation en direct
 
-Le 26 octobre 2026, le chargeur a retenu les **23 actifs sans échec**. L’historique commun couvre le **6 février 2025 au 23 octobre 2026** : 440 lignes de cours et 439 rendements journaliers après nettoyage. La cotation parisienne de FOHW limite le début de la période ; le chargeur conserve désormais les actifs plus récents et restreint le backtest à la période commune, au lieu de les supprimer selon leur pourcentage de données manquantes.
+Après retrait du produit Apple à levier, le 26 octobre 2026, les **22 actifs restants ont chargé sans échec**. L’historique commun couvre le **6 février 2025 au 23 octobre 2026** : 440 lignes de cours et 439 rendements journaliers après nettoyage. La cotation parisienne de FOHW limite le début de la période ; le chargeur conserve les actifs plus récents et restreint le backtest à la période commune.
 
-Le pipeline complet et le backtest ont exécuté cette période. Les plafonds configurés ont été respectés : position maximale 6,52 %, somme des positions supérieures à 5 % de 35,08 %, cluster maximal 16,82 %. Ces résultats valident l’exécution technique et les contrôles internes ; ils ne constituent pas une certification UCITS ni une validation prédictive des convictions.
+Le pipeline complet et le backtest ont exécuté cette période. Les plafonds configurés sont respectés : position maximale 7,01 %, somme des positions supérieures à 5 % de 36,37 %, cluster maximal 15,85 %. Ces résultats valident l’exécution technique et les contrôles internes ; ils ne constituent pas une certification UCITS ni une validation prédictive des convictions.

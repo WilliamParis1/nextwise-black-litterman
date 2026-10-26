@@ -15,10 +15,10 @@ from backtest import run_backtest
 
 class PortfolioTests(unittest.TestCase):
     def test_requested_universe(self):
-        expected = {'ADYEN', 'ASM', 'ASML', 'CRL', 'AM', 'ERA', 'FOHW', 'GL9', 'ISAE', 'ITWN', 'BATT', 'LR', 'LDO', '3AAP', 'WHCA', 'NEX', 'PRY', 'SU', 'WCOS', 'SPIE', 'TE', 'HO', 'NUCL'}
+        expected = {'ADYEN', 'ASM', 'ASML', 'CRL', 'AM', 'ERA', 'FOHW', 'GL9', 'ISAE', 'ITWN', 'BATT', 'LR', 'LDO', 'WHCA', 'NEX', 'PRY', 'SU', 'WCOS', 'SPIE', 'TE', 'HO', 'NUCL'}
         self.assertEqual({a['symbol'] for a in PORTFOLIO}, expected)
-        self.assertEqual(len(PORTFOLIO), 23)
-        self.assertEqual(len({a['ticker'] for a in PORTFOLIO}), 23)
+        self.assertEqual(len(PORTFOLIO), 22)
+        self.assertEqual(len({a['ticker'] for a in PORTFOLIO}), 22)
         self.assertEqual(TICKER_FALLBACKS, {})
         for asset in PORTFOLIO:
             self.assertIn(asset['action'], CONVICTION_EXCESS)
@@ -63,7 +63,7 @@ class PortfolioTests(unittest.TestCase):
         self.assertTrue((w >= 0).all())
         self.assertAlmostEqual(w.sum(), 1)
         self.assertTrue(result['ucits_report']['all_pass'], result['ucits_report'])
-        self.assertEqual(result['n_assets'], 23)
+        self.assertEqual(result['n_assets'], 22)
         bt = run_backtest(returns, w, transaction_cost=DEFAULT_PARAMS['transaction_cost'])
         self.assertTrue(np.isfinite(bt['ann_return']))
         self.assertEqual(len(bt['daily_returns']), len(returns))
