@@ -2,6 +2,10 @@
 
 Application Streamlit d’allocation multi-actifs combinant les convictions Black-Litterman, la parité de risque hiérarchique (HRP), des contraintes UCITS et un backtest avec coûts de transaction.
 
+## Lancement Windows par double-clic
+
+Téléchargez le dépôt avec **Code → Download ZIP**, puis extrayez entièrement le ZIP. Ouvrez **Start Nextwise.bat** à la racine du dossier extrait. Avec Python 3.10+ installé et disponible dans le PATH, le lanceur crée l’environnement Python, installe les dépendances et lance Streamlit. Gardez sa fenêtre ouverte pendant l’utilisation. Ce lanceur doit être exécuté depuis le dossier complet ; le fichier `.bat` seul ne contient pas l’application.
+
 ## Démarrage rapide
 
 Prérequis : **Python 3.10 ou supérieur** et un accès Internet pour les données Yahoo Finance.
