@@ -4,21 +4,25 @@ Modèle hybride d'allocation multi-asset combinant **Black-Litterman** (convicti
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-red)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 ## 🚀 Installation & Lancement
 
 ```bash
-# 1. Cloner / extraire le dossier
-cd bl_hrp_app
+# Depuis la racine du dépôt (Python 3.10+)
+python -m venv .venv
 
-# 2. Installer les dépendances
-pip install -r requirements.txt
+# Activer sous macOS / Linux
+source .venv/bin/activate
 
-# 3. Lancer l'application
-streamlit run app.py
+# Sous Windows PowerShell, utiliser à la place :
+# .\.venv\Scripts\Activate.ps1
+
+# Installer les dépendances et lancer le dashboard
+python -m pip install -r "nextwise - asset allocation/nextwise/requirements.txt"
+cd "nextwise - asset allocation/nextwise"
+python -m streamlit run app.py
 ```
 
 L'application s'ouvrira dans votre navigateur à `http://localhost:8501`.
@@ -28,17 +32,18 @@ L'application s'ouvrira dans votre navigateur à `http://localhost:8501`.
 ## 📁 Structure du Projet
 
 ```
-bl_hrp_app/
+nextwise - asset allocation/nextwise/
 ├── app.py              # Dashboard Streamlit principal (6 onglets)
 ├── config.py           # Définition du portefeuille, convictions, paramètres
 ├── data_loader.py      # Téléchargement Yahoo Finance + fallbacks
 ├── models.py           # Black-Litterman, HRP, Hybride, UCITS
 ├── backtest.py         # Moteur de backtest + métriques de risque
 ├── requirements.txt    # Dépendances Python
-└── README.md           # Ce fichier
 ```
 
 ---
+
+Le guide se trouve dans [`docs/guide.md`](guide.md). Les fichiers Python restent dans le dossier ci-dessus.
 
 ## 🧬 Pipeline
 
@@ -98,7 +103,7 @@ Tous les paramètres sont modifiables en temps réel dans la sidebar:
 
 ## 🔧 Personnalisation du Portefeuille
 
-Modifiez `config.py` pour ajuster:
+Modifiez [`config.py`](../nextwise%20-%20asset%20allocation/nextwise/config.py) pour ajuster:
 
 ```python
 PORTFOLIO = [
@@ -116,6 +121,10 @@ PORTFOLIO = [
 Actions disponibles: `Achat Fort`, `Conviction Forte`, `Achat`, `Renforcer`, `Maintien`, `Attente`, `Alléger`
 
 ---
+
+## Données et accès réseau
+
+Le dashboard télécharge les cours via Yahoo Finance (`yfinance`) et met les résultats en cache pendant une heure. Aucun fichier de données ni clé API n’est fourni dans ce dépôt. Le chargement nécessite un accès réseau à Yahoo Finance ; certains tickers utilisent les alternatives définies dans `TICKER_FALLBACKS` dans `config.py`.
 
 ## ⚠️ Disclaimer
 
