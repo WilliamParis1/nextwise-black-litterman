@@ -79,7 +79,7 @@ def build_views_from_convictions(
     
     Parameters
     ----------
-    valid_assets : list of asset dicts with 'action' key
+    valid_assets : list of asset dicts with 'action' and optional 'confidence' keys
     equilibrium_returns : (N,) CAPM implied returns (pi = delta * Sigma * w_mkt)
     conviction_excess : dict mapping action → excess return
     conviction_confidence : dict mapping action → confidence (0-1)
@@ -107,7 +107,10 @@ def build_views_from_convictions(
             P_list.append(row)
             # Anchor to equilibrium, not history
             Q_list.append(float(equilibrium_returns[i]) + excess)
-            conf_list.append(conviction_confidence.get(action, 0.30))
+            confidence = float(asset.get("confidence", conviction_confidence.get(action, 0.30)))
+            if not np.isfinite(confidence) or not 0 < confidence <= 1:
+                raise ValueError(f"Invalid view confidence for {asset.get('name', i)}: {confidence}")
+            conf_list.append(confidence)
             view_indices.append(i)
     
     # FIX #1: Return truly empty arrays when no views exist

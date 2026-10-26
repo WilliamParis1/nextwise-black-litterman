@@ -15,72 +15,32 @@
 # Each entry: name, Yahoo ticker, conviction action, cluster, asset class
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Exchange-qualified Yahoo mappings are provisional until live verification.
+# See docs/portfolio.md for the assumptions and confidence rationale.
 PORTFOLIO = [
-    # ── Obligations & Cash ────────────────────────────────────────────────
-    {"name": "Vanguard USD Treasury Bond",  "ticker": "VUTY.L",   "action": "Achat Fort",       "cluster": "Obligations Souveraines", "asset_class": "bond_gov"},
-    {"name": "Amundi Euro Gov Bond 1-3Y",   "ticker": "MTE.PA",   "action": "Maintien",         "cluster": "Obligations Souveraines", "asset_class": "bond_gov_short"},
-    {"name": "Amundi Green Bond",           "ticker": "AGEB.PA",  "action": "Maintien",         "cluster": "Obligations Crédit",      "asset_class": "bond_corp"},
-    {"name": "BNPP Corp 3-5",              "ticker": "CORP.PA",  "action": "Maintien",         "cluster": "Obligations Crédit",      "asset_class": "bond_corp"},
-
-    # ── Métaux Précieux ───────────────────────────────────────────────────
-    {"name": "iShares Physical Gold",       "ticker": "IGLN.L",   "action": "Renforcer",        "cluster": "Or",                      "asset_class": "gold"},
-    {"name": "Amundi Physical Gold",        "ticker": "GOLD.PA",  "action": "Renforcer",        "cluster": "Or",                      "asset_class": "gold"},
-    {"name": "Invesco Physical Gold",       "ticker": "PHAU.L",   "action": "Renforcer",        "cluster": "Or",                      "asset_class": "gold"},
-    {"name": "WT Physical Silver",          "ticker": "PHAG.L",   "action": "Renforcer",        "cluster": "Métaux Précieux",         "asset_class": "silver"},
-    {"name": "WT Physical Platinum",        "ticker": "PHPT.L",   "action": "Maintien",         "cluster": "Métaux Précieux",         "asset_class": "platinum"},
-
-    # ── Métaux Industriels ────────────────────────────────────────────────
-    {"name": "WT Copper (Cuivre)",          "ticker": "COPA.L",   "action": "Renforcer",        "cluster": "Métaux Industriels",      "asset_class": "copper"},
-    {"name": "WT Industrial Metals",        "ticker": "AIGI.L",   "action": "Maintien",         "cluster": "Métaux Industriels",      "asset_class": "ind_metals"},
-
-    # ── Défense & Aérospatiale ────────────────────────────────────────────
-    {"name": "VanEck Defense ETF",          "ticker": "DFNS.L",   "action": "Conviction Forte", "cluster": "Défense & Aéro",          "asset_class": "defense"},
-    {"name": "Dassault Aviation",           "ticker": "AM.PA",    "action": "Conviction Forte", "cluster": "Défense & Aéro",          "asset_class": "defense"},
-    {"name": "Safran",                      "ticker": "SAF.PA",   "action": "Achat",            "cluster": "Défense & Aéro",          "asset_class": "defense"},
-    {"name": "Airbus",                      "ticker": "AIR.PA",   "action": "Achat",            "cluster": "Défense & Aéro",          "asset_class": "aero"},
-    {"name": "Leonardo",                    "ticker": "LDO.MI",   "action": "Achat",            "cluster": "Défense & Aéro",          "asset_class": "defense"},
-
-    # ── Énergie ───────────────────────────────────────────────────────────
-    {"name": "VanEck Uranium",              "ticker": "U3O8.L",   "action": "Achat Fort",       "cluster": "Énergie",                 "asset_class": "uranium"},
-    {"name": "TotalEnergies",               "ticker": "TTE.PA",   "action": "Achat",            "cluster": "Énergie",                 "asset_class": "energy"},
-    {"name": "Engie",                       "ticker": "ENGI.PA",  "action": "Maintien",         "cluster": "Énergie",                 "asset_class": "utility"},
-
-    # ── Industrie & Infrastructure ────────────────────────────────────────
-    {"name": "ArcelorMittal",               "ticker": "MT.AS",    "action": "Maintien",         "cluster": "Industrie Cyclique",      "asset_class": "steel"},
-    {"name": "Prysmian",                    "ticker": "PRY.MI",   "action": "Conviction Forte", "cluster": "Industrie Infra",          "asset_class": "industrial"},
-    {"name": "Vinci",                       "ticker": "DG.PA",    "action": "Maintien",         "cluster": "Industrie Infra",          "asset_class": "construction"},
-    {"name": "Michelin",                    "ticker": "ML.PA",    "action": "Achat",            "cluster": "Industrie Cyclique",      "asset_class": "auto_parts"},
-
-    # ── Tech & Growth ─────────────────────────────────────────────────────
-    {"name": "Amundi S&P 500",              "ticker": "500.PA",   "action": "Alléger",          "cluster": "Indices US",              "asset_class": "sp500"},
-    {"name": "Amundi Nasdaq 100",           "ticker": "ANX.PA",   "action": "Alléger",          "cluster": "Indices US",              "asset_class": "nasdaq"},
-    {"name": "Google (Alphabet)",           "ticker": "GOOG",     "action": "Achat Fort",       "cluster": "Tech US",                 "asset_class": "tech_mega"},
-    {"name": "Schneider Electric",          "ticker": "SU.PA",    "action": "Alléger",          "cluster": "Tech Europe",             "asset_class": "tech_eu"},
-    {"name": "Air Liquide",                 "ticker": "AI.PA",    "action": "Maintien",         "cluster": "Tech Europe",             "asset_class": "industrial_quality"},
-    {"name": "ASML Holding",                "ticker": "ASML.AS",  "action": "Alléger",          "cluster": "Semi-conducteurs",        "asset_class": "semicon"},
-    {"name": "Dassault Systèmes",           "ticker": "DSY.PA",   "action": "Maintien",         "cluster": "Tech Europe",             "asset_class": "software_eu"},
-    {"name": "iShares Taiwan",              "ticker": "EWT",      "action": "Renforcer",        "cluster": "Semi-conducteurs",        "asset_class": "semicon_asia"},
-    {"name": "Amundi Russell 2000",         "ticker": "RS2K.PA",  "action": "Maintien",         "cluster": "Small Caps US",           "asset_class": "small_us"},
-    {"name": "Equasens",                    "ticker": "EQS.PA",   "action": "Achat",            "cluster": "Small Caps EU",           "asset_class": "small_eu"},
-
-    # ── Financières ───────────────────────────────────────────────────────
-    {"name": "Amundi MSCI Financials",      "ticker": "CV9.PA",   "action": "Achat",            "cluster": "Financières",             "asset_class": "financials"},
-    {"name": "BNP Paribas",                 "ticker": "BNP.PA",   "action": "Achat",            "cluster": "Financières",             "asset_class": "bank_eu"},
-
-    # ── Immobilier ────────────────────────────────────────────────────────
-    {"name": "Merlin Properties",           "ticker": "MRL.MC",   "action": "Renforcer",        "cluster": "Immobilier",              "asset_class": "reit"},
-    {"name": "Warehouse Estates",           "ticker": "WEB.BR",   "action": "Renforcer",        "cluster": "Immobilier",              "asset_class": "reit"},
-    {"name": "Cairn Homes",                 "ticker": "CRN.L",    "action": "Renforcer",        "cluster": "Immobilier",              "asset_class": "homebuilder"},
-    {"name": "Glenveagh Properties",        "ticker": "GLV.L",    "action": "Renforcer",        "cluster": "Immobilier",              "asset_class": "homebuilder"},
-    {"name": "Unibail-Rodamco",             "ticker": "URW.PA",   "action": "Renforcer",        "cluster": "Immobilier",              "asset_class": "reit_prime"},
-    {"name": "Saint-Gobain",                "ticker": "SGO.PA",   "action": "Alléger",          "cluster": "Construction",            "asset_class": "construction"},
-
-    # ── Émergents & Diversification ───────────────────────────────────────
-    {"name": "Amundi MSCI Korea",           "ticker": "KRW.PA",   "action": "Alléger",          "cluster": "Émergents Asie",          "asset_class": "em_korea"},
-    {"name": "Amundi MSCI Brazil",          "ticker": "BRZ.PA",   "action": "Alléger",          "cluster": "Émergents LATAM",         "asset_class": "em_brazil"},
-    {"name": "Orange",                      "ticker": "ORA.PA",   "action": "Maintien",         "cluster": "Telecom & Conso",         "asset_class": "telecom"},
-    {"name": "Accor",                       "ticker": "AC.PA",    "action": "Maintien",         "cluster": "Telecom & Conso",         "asset_class": "hospitality"},
-    {"name": "Ahold Delhaize",              "ticker": "AD.AS",    "action": "Maintien",         "cluster": "Telecom & Conso",         "asset_class": "consumer_staple"},
+    {'name': 'Adyen', 'symbol': 'ADYEN', 'ticker': 'ADYEN.AS', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Paiements', 'asset_class': 'payments'},
+    {'name': 'ASM International', 'symbol': 'ASM', 'ticker': 'ASM.AS', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Semi-conducteurs', 'asset_class': 'semicon'},
+    {'name': 'ASML Holding', 'symbol': 'ASML', 'ticker': 'ASML.AS', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Semi-conducteurs', 'asset_class': 'semicon'},
+    {'name': 'Carel Industries', 'symbol': 'CRL', 'ticker': 'CRL.MI', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Industrie & efficacité', 'asset_class': 'industrial'},
+    {'name': 'Dassault Aviation', 'symbol': 'AM', 'ticker': 'AM.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
+    {'name': 'Eramet', 'symbol': 'ERA', 'ticker': 'ERA.PA', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Matières premières', 'asset_class': 'mining'},
+    {'name': 'FRAETFFOHWIVXPAR', 'symbol': 'FOHW', 'ticker': 'FOHW.PA', 'action': 'Maintien', 'confidence': 0.2, 'cluster': 'Fonds à identifier', 'asset_class': 'unverified_fund'},
+    {'name': 'Glanbia PLC', 'symbol': 'GL9', 'ticker': 'GL9.IR', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Nutrition', 'asset_class': 'nutrition'},
+    {'name': 'iShares Agribusiness UCITS ETF USD (Acc)', 'symbol': 'ISAE', 'ticker': 'ISAE.AS', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Agribusiness', 'asset_class': 'agribusiness'},
+    {'name': 'iShares MSCI Taiwan UCITS ETF', 'symbol': 'ITWN', 'ticker': 'ITWN.AS', 'action': 'Attente', 'confidence': 0.35, 'cluster': 'Semi-conducteurs', 'asset_class': 'taiwan_equity'},
+    {'name': 'L&G Battery Value-Chain UCITS ETF', 'symbol': 'BATT', 'ticker': 'BATT.L', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Batteries', 'asset_class': 'battery_equity'},
+    {'name': 'Legrand', 'symbol': 'LR', 'ticker': 'LR.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
+    {'name': 'Leonardo', 'symbol': 'LDO', 'ticker': 'LDO.MI', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
+    {'name': 'Leverage Shares 3x Apple ETP', 'symbol': '3AAP', 'ticker': '3AAP.L', 'action': 'Alléger', 'confidence': 0.6, 'cluster': 'Technologie à levier', 'asset_class': 'leveraged_equity'},
+    {'name': 'MSCI World Health Care USD Acc', 'symbol': 'WHCA', 'ticker': 'WHCA.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Santé', 'asset_class': 'healthcare_equity'},
+    {'name': 'Nexans', 'symbol': 'NEX', 'ticker': 'NEX.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Électrification', 'asset_class': 'electrification'},
+    {'name': 'Prysmian', 'symbol': 'PRY', 'ticker': 'PRY.MI', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
+    {'name': 'Schneider Electric', 'symbol': 'SU', 'ticker': 'SU.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
+    {'name': 'SPDR MSCI World Consumer Staples UCITS ETF', 'symbol': 'WCOS', 'ticker': 'WCOS.AS', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Consommation de base', 'asset_class': 'consumer_staples_equity'},
+    {'name': 'SPIE', 'symbol': 'SPIE', 'ticker': 'SPIE.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Services industriels', 'asset_class': 'industrial_services'},
+    {'name': 'Technip Energies', 'symbol': 'TE', 'ticker': 'TE.PA', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Énergie & ingénierie', 'asset_class': 'energy_engineering'},
+    {'name': 'Thales', 'symbol': 'HO', 'ticker': 'HO.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
+    {'name': 'VanEck Uranium and Nuclear Technologies UCITS ETF', 'symbol': 'NUCL', 'ticker': 'NUCL.PA', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Nucléaire', 'asset_class': 'nuclear_equity'},
 ]
 
 
@@ -171,20 +131,5 @@ DEFAULT_PARAMS = {
 # TICKER FALLBACKS (if Yahoo doesn't recognize a ticker, try alternatives)
 # ─────────────────────────────────────────────────────────────────────────────
 
-TICKER_FALLBACKS = {
-    "VUTY.L":  ["VGIT",   "GOVT"],
-    "MTE.PA":  ["IBGS.L", "SEGA.PA"],
-    "AGEB.PA": ["CB6.PA", "VAGF.L"],
-    "CORP.PA": ["C35.PA", "IEAC.L"],
-    "PHPT.L":  ["PPLT",   "PHPD.L"],
-    "COPA.L":  ["CPER",   "JJC"],
-    "AIGI.L":  ["DBB",    "JJM"],
-    "DFNS.L":  ["ITA",    "PPA"],
-    "U3O8.L":  ["URA",    "URNM"],
-    "CV9.PA":  ["XLF",    "IXG"],
-    "RS2K.PA": ["IWM",    "VTWO"],
-    "KRW.PA":  ["EWY",    "FLKR"],
-    "BRZ.PA":  ["EWZ",    "EWZS"],
-    "GLV.L":   ["CRN.L",  "IPQ.L"],
-    "WEB.BR":  ["URW.PA", "IMMO.AS"],
-}
+# Do not substitute different instruments when a requested asset is unavailable.
+TICKER_FALLBACKS = {}

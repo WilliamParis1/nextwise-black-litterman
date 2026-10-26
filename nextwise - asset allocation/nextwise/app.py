@@ -149,6 +149,9 @@ st.markdown("""
 ### Allocation Hybride Multi-Asset — Backtest & Analyse de Risque
 """)
 
+st.caption("Convictions initiales qualitatives : la confiance mesure la force d’une vue Black-Litterman, pas une probabilité de gain. Les valorisations récentes ne sont pas prises en compte.")
+st.warning("3AAP est un produit Apple à levier quotidien 3x : il n’est pas équivalent à une action Apple détenue à long terme. Les contraintes du modèle ne certifient pas l’éligibilité réglementaire de ce produit.")
+
 # ═════════════════════════════════════════════════════════════════════════════
 # DATA LOADING & MODEL EXECUTION
 # ═════════════════════════════════════════════════════════════════════════════
@@ -341,7 +344,8 @@ with tab1:
         sorted_idx = np.argsort(R["ucits_weights"])[::-1][:20]
         top_df = pd.DataFrame([{
             "Position": valid_assets[i]["name"],
-            "Ticker": valid_assets[i]["ticker"],
+            "Code fourni": valid_assets[i].get("symbol", valid_assets[i]["ticker"]),
+        "Ticker": valid_assets[i]["ticker"],
             "Cluster": valid_assets[i].get("cluster", ""),
             "Poids": f"{R['ucits_weights'][i]*100:.2f}%",
             "Action": f"{ACTION_EMOJI.get(valid_assets[i]['action'],'')} {valid_assets[i]['action']}",
@@ -1003,9 +1007,11 @@ with tab6:
     
     full_alloc = pd.DataFrame([{
         "Position": valid_assets[i]["name"],
+        "Code fourni": valid_assets[i].get("symbol", valid_assets[i]["ticker"]),
         "Ticker": valid_assets[i]["ticker"],
         "Cluster": valid_assets[i].get("cluster", ""),
         "Action": valid_assets[i].get("action", ""),
+        "Confiance vue BL": valid_assets[i].get("confidence", CONVICTION_CONFIDENCE.get(valid_assets[i].get("action"), 0.30)),
         "Poids BL-HRP (%)": round(R["ucits_weights"][i] * 100, 3),
         "Poids EW (%)": round(R["ew_weights"][i] * 100, 3),
         "Poids HRP (%)": round(R["hrp_std_weights"][i] * 100, 3),

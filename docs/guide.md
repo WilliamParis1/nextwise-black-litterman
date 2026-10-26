@@ -101,6 +101,10 @@ Tous les paramètres sont modifiables en temps réel dans la sidebar:
 
 ---
 
+## Portefeuille actuel
+
+Voir le [portefeuille et les convictions initiales](portfolio.md) pour les 23 actifs demandés, les tickers proposés et les motifs. Chaque ligne possède une `confidence` individuelle, prioritaire sur le barème par action ; ce paramètre n’est pas une probabilité de gain.
+
 ## 🔧 Personnalisation du Portefeuille
 
 Modifiez [`config.py`](../nextwise%20-%20asset%20allocation/nextwise/config.py) pour ajuster:
@@ -108,11 +112,12 @@ Modifiez [`config.py`](../nextwise%20-%20asset%20allocation/nextwise/config.py) 
 ```python
 PORTFOLIO = [
     {
-        "name": "Google (Alphabet)",   # Nom affiché
-        "ticker": "GOOG",             # Ticker Yahoo Finance
-        "action": "Achat Fort",       # Votre conviction
-        "cluster": "Tech US",         # Groupe de risque
-        "asset_class": "tech_mega",   # Classe d'actif
+        "name": "ASML Holding",   # Nom affiché
+        "ticker": "ASML.AS",             # Ticker Yahoo Finance
+        "action": "Renforcer",       # Votre conviction
+        "confidence": 0.55,            # Force subjective de la vue BL
+        "cluster": "Semi-conducteurs",         # Groupe de risque
+        "asset_class": "semicon",   # Classe d'actif
     },
     # ... ajoutez/retirez des positions
 ]
