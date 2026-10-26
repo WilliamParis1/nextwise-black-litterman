@@ -15,7 +15,7 @@
 # Each entry: name, Yahoo ticker, conviction action, cluster, asset class
 # ─────────────────────────────────────────────────────────────────────────────
 
-# Exchange-qualified Yahoo mappings are provisional until live verification.
+# Exchange-qualified Yahoo mappings checked against live Yahoo history.
 # See docs/portfolio.md for the assumptions and confidence rationale.
 PORTFOLIO = [
     {'name': 'Adyen', 'symbol': 'ADYEN', 'ticker': 'ADYEN.AS', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Paiements', 'asset_class': 'payments'},
@@ -24,15 +24,15 @@ PORTFOLIO = [
     {'name': 'Carel Industries', 'symbol': 'CRL', 'ticker': 'CRL.MI', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Industrie & efficacité', 'asset_class': 'industrial'},
     {'name': 'Dassault Aviation', 'symbol': 'AM', 'ticker': 'AM.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
     {'name': 'Eramet', 'symbol': 'ERA', 'ticker': 'ERA.PA', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Matières premières', 'asset_class': 'mining'},
-    {'name': 'FRAETFFOHWIVXPAR', 'symbol': 'FOHW', 'ticker': 'FOHW.PA', 'action': 'Maintien', 'confidence': 0.2, 'cluster': 'Fonds à identifier', 'asset_class': 'unverified_fund'},
+    {'name': 'Franklin Future of Health and Wellness UCITS ETF', 'symbol': 'FOHW', 'ticker': 'FOHW.PA', 'action': 'Maintien', 'confidence': 0.2, 'cluster': 'Santé', 'asset_class': 'healthcare_equity'},
     {'name': 'Glanbia PLC', 'symbol': 'GL9', 'ticker': 'GL9.IR', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Nutrition', 'asset_class': 'nutrition'},
     {'name': 'iShares Agribusiness UCITS ETF USD (Acc)', 'symbol': 'ISAE', 'ticker': 'ISAE.AS', 'action': 'Maintien', 'confidence': 0.4, 'cluster': 'Agribusiness', 'asset_class': 'agribusiness'},
     {'name': 'iShares MSCI Taiwan UCITS ETF', 'symbol': 'ITWN', 'ticker': 'ITWN.AS', 'action': 'Attente', 'confidence': 0.35, 'cluster': 'Semi-conducteurs', 'asset_class': 'taiwan_equity'},
     {'name': 'L&G Battery Value-Chain UCITS ETF', 'symbol': 'BATT', 'ticker': 'BATT.L', 'action': 'Attente', 'confidence': 0.3, 'cluster': 'Batteries', 'asset_class': 'battery_equity'},
     {'name': 'Legrand', 'symbol': 'LR', 'ticker': 'LR.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
     {'name': 'Leonardo', 'symbol': 'LDO', 'ticker': 'LDO.MI', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Défense & Aéro', 'asset_class': 'defense'},
-    {'name': 'Leverage Shares 3x Apple ETP', 'symbol': '3AAP', 'ticker': '3AAP.L', 'action': 'Alléger', 'confidence': 0.6, 'cluster': 'Technologie à levier', 'asset_class': 'leveraged_equity'},
-    {'name': 'MSCI World Health Care USD Acc', 'symbol': 'WHCA', 'ticker': 'WHCA.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Santé', 'asset_class': 'healthcare_equity'},
+    {'name': 'Leverage Shares 3x Apple ETP', 'symbol': '3AAP', 'ticker': '3AAP.MI', 'action': 'Alléger', 'confidence': 0.6, 'cluster': 'Technologie à levier', 'asset_class': 'leveraged_equity'},
+    {'name': 'iShares MSCI World Health Care Sector Advanced UCITS ETF USD Acc', 'symbol': 'WHCA', 'ticker': 'WHCA.L', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Santé', 'asset_class': 'healthcare_equity'},
     {'name': 'Nexans', 'symbol': 'NEX', 'ticker': 'NEX.PA', 'action': 'Renforcer', 'confidence': 0.5, 'cluster': 'Électrification', 'asset_class': 'electrification'},
     {'name': 'Prysmian', 'symbol': 'PRY', 'ticker': 'PRY.MI', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},
     {'name': 'Schneider Electric', 'symbol': 'SU', 'ticker': 'SU.PA', 'action': 'Renforcer', 'confidence': 0.55, 'cluster': 'Électrification', 'asset_class': 'electrification'},

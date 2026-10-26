@@ -278,16 +278,18 @@ def load_portfolio_data(lookback_years: int = 3) -> tuple[pd.DataFrame, pd.DataF
     for name, series in prices_dict.items():
         prices_df[name] = series.reindex(prices_df.index)
     
-    # Forward-fill gaps (max 5 days), then drop assets with >30% NaN
-    prices_df = prices_df.ffill(limit=5)
-    nan_pct = prices_df.isna().mean()
-    good_cols = nan_pct[nan_pct < 0.30].index.tolist()
-    prices_df = prices_df[good_cols].dropna()
-    
-    # Filter valid_assets to match
-    valid_names = set(good_cols)
-    valid_assets = [a for a in valid_assets if a["name"] in valid_names]
-    
+    # Keep requested instruments with shorter listing histories. Never invent
+    # pre-listing prices or silently remove them to extend the backtest.
+    prices_df = prices_df.ffill(limit=5).dropna()
+    if len(prices_df) <= 50:
+        st.error("Historique commun insuffisant : au moins 51 cours communs sont nécessaires.")
+        return pd.DataFrame(), pd.DataFrame(), [], failed_tickers
+    if len(prices_df) < len(all_dates):
+        st.info(
+            "Backtest limité à l’historique commun des actifs chargés : "
+            f"{prices_df.index[0]:%Y-%m-%d} → {prices_df.index[-1]:%Y-%m-%d}."
+        )
+
     # Compute daily simple returns
     returns_df = prices_df.pct_change().dropna()
     

@@ -1,6 +1,6 @@
 # Portefeuille et convictions initiales
 
-Les 23 lignes demandées remplacent entièrement le portefeuille initial. `symbol` conserve le code fourni ; `ticker` est la correspondance Yahoo proposée avec place de cotation. **Les correspondances et les cours restent à vérifier en direct** : l’accès Yahoo est bloqué dans l’environnement de préparation. Les codes courts peuvent désigner des cotations ou classes différentes ; l’ISIN prévaut, notamment pour les ETF. FOHW reste à identifier par son ISIN.
+Les 23 lignes demandées remplacent entièrement le portefeuille initial. `symbol` conserve le code fourni ; `ticker` est la correspondance Yahoo proposée avec place de cotation. Les 23 tickers ont fourni des cours en direct le 26 octobre 2026. Les codes courts peuvent désigner des cotations ou classes différentes ; vérifier les ISIN avec le relevé du courtier pour confirmer les parts détenues. FOHW.PA est identifié par Yahoo comme Franklin Future of Health and Wellness UCITS ETF.
 
 ## Méthode de conviction
 
@@ -20,15 +20,15 @@ Les excès de rendement annuels restent ceux du modèle : Renforcer +3 %, Attent
 | Carel Industries | CRL | `CRL.MI` | Maintien | 40% | Automatisation et efficacité énergétique ; sensibilité au cycle industriel. |
 | Dassault Aviation | AM | `AM.PA` | Renforcer | 50% | Exposition défense et aviation, avec concentration des contrats. |
 | Eramet | ERA | `ERA.PA` | Attente | 30% | Résultats sensibles aux prix des métaux et risques opérationnels. |
-| FRAETFFOHWIVXPAR | FOHW | `FOHW.PA` | Maintien | 20% | Identité à confirmer par ISIN ; aucune vue directionnelle. |
+| Franklin Future of Health and Wellness UCITS ETF | FOHW | `FOHW.PA` | Maintien | 20% | Thématique santé et bien-être concentrée ; vue neutre par prudence. |
 | Glanbia PLC | GL9 | `GL9.IR` | Maintien | 40% | Nutrition et ingrédients ; sensibilité aux marges et à la consommation. |
 | iShares Agribusiness UCITS ETF USD (Acc) | ISAE | `ISAE.AS` | Maintien | 40% | Diversification de titres, mais exposition sectorielle cyclique. |
 | iShares MSCI Taiwan UCITS ETF | ITWN | `ITWN.AS` | Attente | 35% | Concentration géographique et recoupement avec les semi-conducteurs. |
 | L&G Battery Value-Chain UCITS ETF | BATT | `BATT.L` | Attente | 30% | Thématique cyclique, concurrence et sensibilité aux matières premières. |
 | Legrand | LR | `LR.PA` | Renforcer | 55% | Exposition structurelle aux infrastructures électriques ; cycle du bâtiment. |
 | Leonardo | LDO | `LDO.MI` | Renforcer | 50% | Exposition défense diversifiée ; risques de programmes et de contrats. |
-| Leverage Shares 3x Apple ETP | 3AAP | `3AAP.L` | Alléger | 60% | Levier quotidien 3x, dépendance au chemin et concentration sur Apple. |
-| MSCI World Health Care USD Acc | WHCA | `WHCA.PA` | Renforcer | 50% | Diversification sectorielle défensive ; risques réglementaires et de change. |
+| Leverage Shares 3x Apple ETP | 3AAP | `3AAP.MI` | Alléger | 60% | Levier quotidien 3x, dépendance au chemin et concentration sur Apple. |
+| iShares MSCI World Health Care Sector Advanced UCITS ETF USD Acc | WHCA | `WHCA.L` | Renforcer | 50% | Diversification sectorielle défensive ; risques réglementaires et de change. |
 | Nexans | NEX | `NEX.PA` | Renforcer | 50% | Demande des réseaux électriques, avec risques de projets et d’exécution. |
 | Prysmian | PRY | `PRY.MI` | Renforcer | 55% | Exposition aux câbles et réseaux ; dépendance aux investissements. |
 | Schneider Electric | SU | `SU.PA` | Renforcer | 55% | Gestion de l’énergie et automatisation ; valorisation à vérifier. |
@@ -41,10 +41,16 @@ Les excès de rendement annuels restent ceux du modèle : Renforcer +3 %, Attent
 ## Données et limites
 
 - Aucun ancien actif ou fonds de remplacement n’est conservé. Une donnée manquante ne doit pas être remplacée par une exposition différente.
-- Vérifier en priorité les places et classes de FOHW, ISAE, ITWN, BATT, WHCA, WCOS et NUCL auprès des ISIN du relevé de portefeuille.
+- Les places sont qualifiées pour Yahoo. WHCA.L fournit un historique plus long que WHCA.AS ; 3AAP.MI fournit un historique exploitable contrairement à 3AAP.L. Il s’agit de cotations alternatives identifiées sous le même nom de fonds ou produit, pas de fonds de remplacement. Vérifier les ISIN du relevé avant de traiter ces données comme les parts effectivement détenues.
 - Le portefeuille reste majoritairement actions, avec recoupements sectoriels. Les plafonds de cluster s’appliquent aux groupes définis dans `config.py` ; ils ne suppriment pas toutes les corrélations entre groupes.
 - Les cotations peuvent être en EUR, GBP ou USD : le backtest existant utilise les rendements locaux sans conversion commune de devise.
 - 3AAP est un ETP à levier quotidien, avec dépendance au chemin, frais et risques d’émetteur. Le backtest de ses cours ne simule pas les exigences réglementaires ni une exposition notionnelle UCITS.
 - Les poids ajustés à partir de tout l’historique sont ensuite backtestés sur ce même historique : la comparaison est rétrospective, pas un test hors échantillon.
 
 Pour ajuster une vue, modifier `action` et `confidence` dans `config.py`. Les motifs sont documentés ici pour permettre une révision explicite.
+
+## Validation en direct
+
+Le 26 octobre 2026, le chargeur a retenu les **23 actifs sans échec**. L’historique commun couvre le **6 février 2025 au 23 octobre 2026** : 440 lignes de cours et 439 rendements journaliers après nettoyage. La cotation parisienne de FOHW limite le début de la période ; le chargeur conserve désormais les actifs plus récents et restreint le backtest à la période commune, au lieu de les supprimer selon leur pourcentage de données manquantes.
+
+Le pipeline complet et le backtest ont exécuté cette période. Les plafonds configurés ont été respectés : position maximale 6,52 %, somme des positions supérieures à 5 % de 35,08 %, cluster maximal 16,82 %. Ces résultats valident l’exécution technique et les contrôles internes ; ils ne constituent pas une certification UCITS ni une validation prédictive des convictions.

@@ -1,6 +1,7 @@
 """Offline regression checks; synthetic returns do not validate market data."""
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 import numpy as np
@@ -35,6 +36,21 @@ class PortfolioTests(unittest.TestCase):
         for invalid in [0, -1, 1.1, float('nan')]:
             with self.assertRaises(ValueError):
                 build_views_from_convictions([{'action': 'Renforcer', 'confidence': invalid}], np.zeros(1), CONVICTION_EXCESS, CONVICTION_CONFIDENCE, 1)
+
+    def test_shorter_listing_history_is_retained(self):
+        import data_loader
+        index = pd.bdate_range('2025-01-01', periods=120)
+        assets = [dict(name='Old', ticker='OLD'), dict(name='New', ticker='NEW')]
+        prices = pd.DataFrame({'OLD': np.arange(120) + 100., 'NEW': np.r_[np.full(60, np.nan), np.arange(60) + 100.]}, index=index)
+        data_loader.load_portfolio_data.clear()
+        with patch.object(data_loader, 'PORTFOLIO', assets), patch.object(data_loader, 'download_prices', return_value=prices):
+            loaded, returns, valid, failed = data_loader.load_portfolio_data(3)
+        self.assertEqual([a['name'] for a in valid], ['Old', 'New'])
+        self.assertEqual(loaded.shape, (60, 2))
+        self.assertEqual(returns.shape, (59, 2))
+        self.assertEqual(loaded.index[0], index[60])
+        self.assertEqual(failed, [])
+        data_loader.load_portfolio_data.clear()
 
     def test_pipeline_and_backtest(self):
         rng = np.random.default_rng(73)
